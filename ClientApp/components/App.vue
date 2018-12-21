@@ -9,12 +9,15 @@
                 </li>
             </ul>
         </p>
+        <product-list />
     </div>
 </template>
 
 <script>
+import ProductList from './products/List'
 export default {
     name: 'app',
+    components: ProductList,
     data () {
         return {
             time: new Date().toString(),
