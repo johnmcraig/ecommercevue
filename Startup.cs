@@ -34,12 +34,13 @@ namespace ecommercevue
             services.AddDbContext<EcommerceDbContext>(options => {
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
             });
+
             services.AddIdentity<AppUser, AppRole>()
                 .AddEntityFrameworkStores<EcommerceDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc()
-            .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.Configure<RazorViewEngineOptions>(options => {
                 options.ViewLocationExpanders.Add(new FeatureLocationExpander());

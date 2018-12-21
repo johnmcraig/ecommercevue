@@ -21,7 +21,9 @@ namespace ecommercevue.Data
                     LockoutEnabled = false
                 };
 
-                UserManager.CreateAsync(user, "Password*").GetAwaiter().GetResult();
+                UserManager.CreateAsync(user, "Password*")
+                    .GetAwaiter()
+                    .GetResult();
             }
         }
     }

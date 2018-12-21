@@ -15,17 +15,6 @@ namespace ecommercevue
     {
         public static void Main(string[] args)
         {
-            // var host = BuildWebHost(args);
-            // using (var scope = host.Services.CreateScope())
-            // {
-            //     var services = scope.ServiceProvider;
-            //     var dbContext = services.GetRequiredService<EcommerceDbContext>();
-            //     dbContext.Database.Migrate();
-            //     dbContext.EnsureSeeded();
-            // }
-
-            // host.Run();
-
             CreateWebHostBuilder(args).Build().Run();
         }
 
