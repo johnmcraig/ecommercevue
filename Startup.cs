@@ -40,7 +40,7 @@ namespace ecommercevue
                 .AddDefaultTokenProviders();
 
             services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.Configure<RazorViewEngineOptions>(options => {
                 options.ViewLocationExpanders.Add(new FeatureLocationExpander());
