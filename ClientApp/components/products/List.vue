@@ -5,14 +5,14 @@
             <div class="item" v-for="product in products" :key="product.slug">
                <h3 @click="select(product)"> {{ product.name}} </h3>
                <img :src="product.thumbnail" :alt="product.name" @click="select(product)" />
-               <p @click="select(product)">{{ product.shortDesription }}</p>
+               <p @click="select(product)">{{ product.shortDescription }}</p>
                <p @click="select(product)"> {{ product.price }}</p>
                <hr />
             </div>
             <div v-if="selectProduct" class="details">
                 <h1>{{ selectProduct.name }}</h1>
                 <img :src="selectProduct.thumbnail" :alt="selectProduct.name" />
-                <p>{{ selectProduct.shortDesription }}</p>
+                <p>{{ selectProduct.shortDescription }}</p>
                 <p>{{ selectProduct.description }}</p>
                 <p>{{ selectProduct.price }}</p>
             </div>
@@ -25,8 +25,15 @@ export default {
     name: 'product-list',
     data () {
         return {
-            products: [
-
+            products: [ 
+                    {
+                        name: "Samsung Galaxy 8",
+                        slug: "samsung-galxy-s8",
+                        thumbnail: "http://placehold.it/200x300",
+                        shortDescription: "Samsung Galaxy S8 Android smartphone",
+                        price: 499.99,
+                        description: "Lorem Ipsum"
+                    }
             ],
             selectProduct: null
         }

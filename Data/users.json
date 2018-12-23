@@ -1,0 +1,11 @@
+[
+  {
+    "Id": 0,
+    "FirstName": "Jon",
+    "LastName": "Doe",
+    "UserName": "default@example.com",
+    "Email": "default@exapmle.com",
+    "EmailConfirmed": true,
+    "LockoutEnabled": false
+  }
+]

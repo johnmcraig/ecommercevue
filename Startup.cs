@@ -39,6 +39,8 @@ namespace ecommercevue
                 .AddEntityFrameworkStores<EcommerceDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddTransient<DataSeeder>();
+
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
@@ -46,12 +48,10 @@ namespace ecommercevue
                 options.ViewLocationExpanders.Add(new FeatureLocationExpander());
             });
 
-            DbContextExtensions.UserManager = services.BuildServiceProvider()
-                .GetService<UserManager<AppUser>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, DataSeeder dataSeeder)
         {
             if (env.IsDevelopment())
             {
@@ -80,6 +80,8 @@ namespace ecommercevue
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
+
+            dataSeeder.Seed();
         }
     }
 }

@@ -344,3 +344,4 @@ appsettings.local.json
 /node_modules/*
 /bin/*
 /obj/*
+wwwroot/dist/main.js

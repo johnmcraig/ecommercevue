@@ -15,7 +15,7 @@ namespace Features.Controllers
         }
         public async Task<IActionResult> Get()
         {
-            return Ok(await _dbContext.Users.ToListAsync());
+            return Ok(await _dbContext.AppUsers.ToListAsync());
         }
 
     }

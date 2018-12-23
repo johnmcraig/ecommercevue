@@ -6,8 +6,10 @@ namespace ecommercevue.Data
 {
     public class EcommerceDbContext : IdentityDbContext<AppUser, AppRole, int>
     {
-        public EcommerceDbContext(DbContextOptions<EcommerceDbContext> options) : base(options)
+        public EcommerceDbContext (DbContextOptions<EcommerceDbContext> options) : base (options)
         {
         }
+
+        public DbSet<AppUser> AppUsers { get; set; }
     }
 }
