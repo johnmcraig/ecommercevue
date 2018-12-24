@@ -345,3 +345,4 @@ appsettings.local.json
 /bin/*
 /obj/*
 wwwroot/dist/main.js
+wwwroot/dist/main.js
