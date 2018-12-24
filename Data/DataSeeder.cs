@@ -5,35 +5,41 @@ using System.Collections.Generic;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace ecommercevue.Data.Entities
 {
     public class DataSeeder
     {
         private readonly EcommerceDbContext _dbContext;
-        private readonly IHostingEnvironment _hosting;
 
-        public DataSeeder (EcommerceDbContext dbContext, IHostingEnvironment hosting)
+        public DataSeeder (EcommerceDbContext dbContext)
         {
             _dbContext = dbContext;
-            _hosting = hosting;
         }
 
-        public void Seed()
+        public async Task Seed()
         {
             _dbContext.Database.EnsureCreated();
 
             if (!_dbContext.AppUsers.Any())
             {
-                // Need to create sample data
-                var filepath = Path.Combine(_hosting.ContentRootPath, "Data/users.json");
-                var json = File.ReadAllText(filepath);
-                var users = JsonConvert.DeserializeObject<IEnumerable<AppUser>>(json);
-
-                _dbContext.AppUsers.AddRange(users);
-
-                _dbContext.SaveChanges();
+                _dbContext.AddRange(users);
+                await _dbContext.SaveChangesAsync();
             }
         }
+
+        List<AppUser> users = new List<AppUser>()
+        {
+             new AppUser()
+             {
+                 FirstName = "Jon",
+                 LastName = "Doe",
+                 UserName = "default@example.com",
+                 Email = "default@exapmle.com",
+                 EmailConfirmed = true,
+                 LockoutEnabled = false
+             }
+        };
     }
 }

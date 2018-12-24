@@ -13,6 +13,8 @@ namespace Features.Controllers
         {
             _dbContext = dbContext;
         }
+
+        [HttpGet]
         public async Task<IActionResult> Get()
         {
             return Ok(await _dbContext.AppUsers.ToListAsync());

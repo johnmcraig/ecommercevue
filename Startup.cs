@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using ecommercevue.Data.Entities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
 
 namespace ecommercevue
 {
@@ -47,17 +48,17 @@ namespace ecommercevue
             services.Configure<RazorViewEngineOptions>(options => {
                 options.ViewLocationExpanders.Add(new FeatureLocationExpander());
             });
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, DataSeeder dataSeeder)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env,
+            ILoggerFactory loggerFactory, DataSeeder dataSeeder)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseWebpackDevMiddleware( new WebpackDevMiddlewareOptions
-                 {
+                app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
+                {
                     HotModuleReplacement = true
                 });
             }
@@ -81,7 +82,7 @@ namespace ecommercevue
                     defaults: new { controller = "Home", action = "Index" });
             });
 
-            dataSeeder.Seed();
+            dataSeeder.Seed().Wait();
         }
     }
 }
