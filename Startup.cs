@@ -71,6 +71,8 @@ namespace ecommercevue
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            dataSeeder.SeedData(20).Wait();
+
             app.UseMvc(routes => {
 
                 routes.MapRoute(
@@ -81,8 +83,6 @@ namespace ecommercevue
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
-
-            dataSeeder.Seed().Wait();
         }
     }
 }
