@@ -22,7 +22,7 @@ namespace ecommercevue.Data
 
             var firstName = GetRandom(userFirstName);
             var lastName = GetRandom(userLastName);
-            var fullName = firstName + lastName;
+            var fullName = firstName + " " + lastName;
 
             if(names.Contains(fullName))
             {
