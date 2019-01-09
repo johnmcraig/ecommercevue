@@ -24,17 +24,17 @@ namespace ecommercevue.Data
             var lastName = GetRandom(userLastName);
             var fullName = firstName + " " + lastName;
 
-            if(names.Contains(fullName))
+            if(names.Contains(firstName) && names.Contains(lastName))
             {
                 MakeUniqueUserNames(names);
             }
 
-            return fullName;
+            return firstName + lastName;
         }
 
         internal static string MakeUserEmail(string userName)
         {
-            return $"contact@{userName.ToLower()}.com";
+            return $"contact@{userName.ToLower().Replace(" ", "")}.com";
         }
 
         private static readonly List<string> userFirstName = new List<string>()

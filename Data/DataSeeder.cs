@@ -48,15 +48,17 @@ namespace ecommercevue.Data.Entities
 
             for (var i = 1; i <= nUsers; i++)
             {
-                var fullName = DataSeedHelper.MakeUniqueUserNames(names);
+                var name = DataSeedHelper.MakeUniqueUserNames(names);
                 
-                names.Add(fullName);
+                names.Add(name);
 
                 users.Add(new AppUser
                 {
                     Id = i,
-                    FirstName = fullName,
-                    Email = DataSeedHelper.MakeUserEmail(fullName)
+                    FirstName = name,
+                    Email = DataSeedHelper.MakeUserEmail(name),
+                    EmailConfirmed = true,
+                    LockoutEnabled = false
                 });
             }
 
