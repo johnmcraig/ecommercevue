@@ -9,6 +9,7 @@ namespace Features.Controllers
     public class UsersController : Controller
     {
         private readonly EcommerceDbContext _dbContext;
+        
         public UsersController(EcommerceDbContext dbContext)
         {
             _dbContext = dbContext;
