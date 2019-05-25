@@ -71,7 +71,7 @@ namespace ecommercevue
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            dataSeeder.SeedData(20).Wait();
+            dataSeeder.SeedData(25).Wait();
 
             app.UseMvc(routes => {
 
