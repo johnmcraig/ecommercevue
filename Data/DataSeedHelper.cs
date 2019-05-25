@@ -32,9 +32,9 @@ namespace ecommercevue.Data
             return firstName + lastName;
         }
 
-        internal static string MakeUserEmail(string userName)
+        internal static string MakeUserEmail(string fullName)
         {
-            return $"contact@{userName.ToLower().Replace(" ", "")}.com";
+            return $"contact@{fullName.ToLower().Replace(" ", "")}.com";
         }
 
         private static readonly List<string> userFirstName = new List<string>()
