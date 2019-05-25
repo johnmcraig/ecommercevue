@@ -1,5 +1,5 @@
 <template>
-    <product-list></product-list>
+    <product-list/>
 </template>
 
 <script>
