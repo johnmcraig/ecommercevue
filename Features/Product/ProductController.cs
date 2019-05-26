@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ecommercevue.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Features.Controllers
 {
@@ -19,15 +20,21 @@ namespace Features.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            return Ok(_dbContext.Products.ToList());
+            var products = await _dbContext.Products.ToListAsync();
+            return Ok(products);
         }
 
-        [HttpGet("{id}")]
-        public ActionResult GetById(int id)
+        [HttpGet("{slug}")]
+        public async Task<IActionResult> Get(string slug)
         {
-            return Ok();
+            var product = await _dbContext.Products.SingleOrDefaultAsync(x => x.Slug == slug);
+            
+            if(product == null)
+                return NotFound();
+
+            return Ok(product);
         }
 
         [HttpPost("")]
