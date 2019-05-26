@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import ProductList from './catalogue/ProductList'
+import ProductList from '../components/catalogue/ProductList'
 
 export default {
     name: 'Home',
@@ -23,6 +23,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 
 </style>
