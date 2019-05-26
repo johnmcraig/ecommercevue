@@ -12,15 +12,15 @@ export default {
     },
     data() {
         return {
-            product: {
-                name: 'Samsung Galaxy S8',
-                slug: 'samsung-galaxy-s8',
-                thumbnail: 'http://placehold.it/200x300',
-                shortDescription: 'Android smartphone with true edge to edge display',
-                price: 499.99,
-                description: 'Lorem Ipsum'
-            }
+            product: null
         }
+    },
+    mounted () {
+        fetch(`/api/product/${slug}`).then(repsonse => {
+            return response.json()
+        }).then(product => {
+            this.product = product
+        })
     }
 }
 </script>
