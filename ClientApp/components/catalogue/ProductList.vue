@@ -21,7 +21,7 @@ export default {
             products: [ 
                     {
                         name: "Samsung Galaxy 8",
-                        slug: "samsung-galaxy-s8",
+                        slug: "samsung-galaxy-8",
                         thumbnail: "http://placehold.it/200x300",
                         shortDescription: "Samsung Galaxy S8 Android smartphone",
                         price: 499.99,
