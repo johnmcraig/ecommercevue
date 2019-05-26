@@ -16,21 +16,13 @@
 <script>
 export default {
     name: 'product-list',
-    data () {
-        return {
-            products: [ 
-                    {
-                        name: "Samsung Galaxy 8",
-                        slug: "samsung-galaxy-8",
-                        thumbnail: "http://placehold.it/200x300",
-                        shortDescription: "Samsung Galaxy S8 Android smartphone",
-                        price: 499.99,
-                        description: "Lorem Ipsum"
-                    }
-            ],
-            selectedProduct: null
+    props: {
+        products: {
+            type: Array,
+            require: true
         }
     },
+    selectedProduct: null,
     methods: {
         select (product) {
             this.$router.push(`/products/${product.slug}`)
