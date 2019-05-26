@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import ProductList from './products/List'
+import ProductList from './catalogue/ProductList'
 
 export default {
     name: 'Home',
