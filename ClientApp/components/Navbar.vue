@@ -1,8 +1,8 @@
 <template>
     <div id="menu">
-		<a href="/" class="menuitem">Home</a>
-		<a href="#about_content" class="menuitem">About</a>
-		<a href="#mission_content" class="menuitem">Mission</a>
+		<a :to="{ name: 'Home' }" class="menuitem">Home</a>
+		<a :to="{ name: 'Home' }" class="menuitem">About</a>
+		<a :to="{ name: 'Users' }" class="menuitem">User List</a>
 		<a href="#contact_content" class="menuitem">Contact</a>
 	</div>
 </template>
