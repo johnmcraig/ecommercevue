@@ -9,19 +9,13 @@
                <p @click="select(product)"> {{ product.price }} </p>
                <hr />
             </div>
-            <product-details class="details" v-if="selectedProduct" :product="selectedProduct" />
         </div>
     </div>
 </template>
 
 <script>
-import ProductDetails from './Details'
-
 export default {
     name: 'product-list',
-    components: {
-        ProductDetails
-    },
     data () {
         return {
             products: [ 
@@ -38,8 +32,8 @@ export default {
         }
     },
     methods: {
-        select(product) {
-            this.selectedProduct = product;
+        select (product) {
+            this.$router.push(`/products/${product.slug}`)
         }
     }
 }
@@ -55,11 +49,6 @@ export default {
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
-}
-
-.list .details {
-    width: 50%;
-    float: left;
 }
 
 .list .item {
