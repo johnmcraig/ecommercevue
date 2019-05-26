@@ -10,11 +10,11 @@ namespace Features.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class ProductsController : ControllerBase
     {
         private readonly EcommerceDbContext _dbContext;
 
-        public ProductController(EcommerceDbContext dbContext)
+        public ProductsController(EcommerceDbContext dbContext)
         {
             _dbContext = dbContext;
         }
