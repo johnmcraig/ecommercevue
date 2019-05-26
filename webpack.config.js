@@ -4,6 +4,7 @@ const bundleOutputDir = "./wwwroot/dist";
 
 module.exports = {
   context: __dirname,
+  mode: "development",
   entry: { main: "./ClientApp/main.js" },
   module: {
     rules: [
