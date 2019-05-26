@@ -29,6 +29,10 @@ namespace ecommercevue.Data.Entities
                 SeedUsers(users);
                 await _dbContext.SaveChangesAsync();
             }
+
+            AddProducts();
+            await _dbContext.SaveChangesAsync();
+
         }
 
         private void SeedUsers(int n)
@@ -38,6 +42,27 @@ namespace ecommercevue.Data.Entities
             foreach (var user in users)
             {
                 _dbContext.AppUsers.AddAsync(user);
+            }
+        }
+
+        private void AddProducts()
+        {
+            if(!_dbContext.Products.Any())
+            {
+                var products = new List<Product>()
+                {
+                    new Product
+                    {
+                        Name = "Samsung Galaxy 8",
+                        Slug = "samsung-galaxy-s8",
+                        Thumbnail = "http://placehold.it/200x300",
+                        ShortDescription = "Samsung Galaxy S8 Android",
+                        Description = "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+                    }
+                };
+
+                _dbContext.Products.AddRange(products);
+                _dbContext.SaveChangesAsync();
             }
         }
 
