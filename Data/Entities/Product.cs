@@ -6,6 +6,8 @@ namespace ecommercevue.Data.Entities
     {
         public int Id { get; set; }
         [Required]
+        public string Name { get; set; }
+        [Required]
         public string Slug { get; set; }
         [Required]
         public string Thumbnail { get; set; }
