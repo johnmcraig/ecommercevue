@@ -2,6 +2,11 @@
   "name": "dotnetandvuetemplate",
   "private": true,
   "version": "1.0.0",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "watch": "vue-cli-service build --mode Development --watch"
+  },
   "devDependencies": {
     "@types/webpack-env": "^1.13.6",
     "aspnet-webpack": "^3.0.0",
