@@ -48,6 +48,8 @@ namespace ecommercevue
             services.Configure<RazorViewEngineOptions>(options => {
                 options.ViewLocationExpanders.Add(new FeatureLocationExpander());
             });
+
+            DataSeeder.UserManager = services.BuildServiceProvider().GetService<UserManager<AppUser>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,7 +73,7 @@ namespace ecommercevue
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            dataSeeder.SeedData(25).Wait();
+            dataSeeder.SeedData().Wait();
 
             app.UseMvc(routes => {
 
