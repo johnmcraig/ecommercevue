@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using ecommercevue.Data.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace ecommercevue.Data.Entities
 {
@@ -14,93 +15,65 @@ namespace ecommercevue.Data.Entities
     {
         private readonly EcommerceDbContext _dbContext;
 
-        public DataSeeder (EcommerceDbContext dbContext)
+        public DataSeeder(EcommerceDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public async Task SeedData(int users)
+        public static UserManager<AppUser> UserManager { get; set; }
+
+        public async Task SeedData()
         {
-            _dbContext.Database.EnsureCreated();
+            await _dbContext.Database.EnsureCreatedAsync();
 
             if (!_dbContext.AppUsers.Any())
             {
-                // _dbContext.AddRange(users);
-                SeedUsers(users);
+                SeedUser();
                 await _dbContext.SaveChangesAsync();
             }
 
-            AddProducts();
-            await _dbContext.SaveChangesAsync();
-
-        }
-
-        private void SeedUsers(int n)
-        {
-            List<AppUser> users = BuildUserList(n);
-
-            foreach (var user in users)
-            {
-                _dbContext.AppUsers.AddAsync(user);
-            }
-        }
-
-        private void AddProducts()
-        {
             if(!_dbContext.Products.Any())
             {
-                var products = new List<Product>()
-                {
-                    new Product
-                    {
-                        Name = "Samsung Galaxy 8",
-                        Slug = "samsung-galaxy-s8",
-                        Thumbnail = "http://placehold.it/200x300",
-                        ShortDescription = "Samsung Galaxy S8 Android",
-                        Description = "Lorem ipsum dolor sit amet consectetur adipisicing elit."
-                    }
-                };
-
-                _dbContext.Products.AddRange(products);
-                _dbContext.SaveChangesAsync();
+                SeedProducts();
+                await _dbContext.SaveChangesAsync();
             }
+
         }
-
-        private List<AppUser> BuildUserList(int nUsers)
+        private void SeedUser()
         {
-            var users = new List<AppUser>();
-            var names = new List<string>();
-
-            for (var i = 1; i <= nUsers; i++)
+            if (UserManager.FindByEmailAsync("default@example.com").GetAwaiter().GetResult() == null)
             {
-                var name = DataSeedHelper.MakeUniqueUserNames(names);
-                
-                names.Add(name);
-
-                users.Add(new AppUser
+                var user = new AppUser
                 {
-                    Id = i,
-                    FirstName = name,
-                    Email = DataSeedHelper.MakeUserEmail(name),
+                    FirstName = "John",
+                    LastName = "Johnson",
+                    UserName = "default@example.com",
+                    Email = "default@exapmle.com",
                     EmailConfirmed = true,
                     LockoutEnabled = false
-                });
-            }
+                };
 
-            return users;
+                UserManager.CreateAsync(user, "Password1*").GetAwaiter().GetResult();
+            }
         }
 
-        // List<AppUser> users = new List<AppUser>()
-        // {
-        //      new AppUser()
-        //      {
-        //          FirstName = "Jon",
-        //          LastName = "Doe",
-        //          UserName = "default@example.com",
-        //          Email = "default@exapmle.com",
-        //          EmailConfirmed = true,
-        //          LockoutEnabled = false
-        //      }
-        // };
+        private void SeedProducts()
+        {
+            var products = new List<Product>()
+            {
+                new Product
+                {
+                    Name = "Samsung Galaxy 8",
+                    Slug = "samsung-galaxy-s8",
+                    Thumbnail = "http://placehold.it/200x300",
+                    ShortDescription = "Samsung Galaxy S8 Android",
+                    Description = "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+                    Price = 499.99M
+                }
+            };
+
+            _dbContext.Products.AddRangeAsync(products);
+            // _dbContext.SaveChangesAsync();
+        }
     }
 }
