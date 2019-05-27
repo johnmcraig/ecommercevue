@@ -12,5 +12,14 @@ namespace ecommercevue.Data
 
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Product> Products { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            
+            builder.Entity<Product>()
+                .HasIndex(b => b.Slug)
+                .IsUnique();
+        }
     }
 }
