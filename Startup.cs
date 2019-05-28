@@ -16,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using ecommercevue.Data.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace ecommercevue
 {
@@ -32,6 +33,10 @@ namespace ecommercevue
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSwaggerGen(c => {
+                c.SwaggerDoc("v1", new Info { Title = "API Test v1", Version = "v1"});
+            });
+
             services.AddDbContext<EcommerceDbContext>(options => {
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
             });
@@ -70,10 +75,16 @@ namespace ecommercevue
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             dataSeeder.SeedData().Wait();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My First API");
+            });
 
             app.UseMvc(routes => {
 
