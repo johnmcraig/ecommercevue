@@ -16,9 +16,10 @@ export default {
         }
     },
     mounted () {
-        fetch('/api/products').then(response => {
+        fetch('api/products').then(response => {
             return response.json()
-        }).then(products => {
+        })
+        .then(products => {
             this.products = products
         })
     }
