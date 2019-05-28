@@ -9,8 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Features.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
-    public class ProductsController : ControllerBase
+    public class ProductsController : Controller
     {
         private readonly EcommerceDbContext _dbContext;
 
@@ -20,7 +19,7 @@ namespace Features.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> Find()
         {
             var products = await _dbContext.Products.ToListAsync();
             return Ok(products);
@@ -29,30 +28,12 @@ namespace Features.Controllers
         [HttpGet("{slug}")]
         public async Task<IActionResult> Get(string slug)
         {
-            var product = await _dbContext.Products.SingleOrDefaultAsync(x => x.Slug == slug);
+            var product = await _dbContext.Products.FirstOrDefaultAsync(x => x.Slug == slug);
             
             if(product == null)
                 return NotFound();
 
             return Ok(product);
-        }
-
-        [HttpPost("")]
-        public void Post([FromBody] string value)
-        { 
-
-        }
-
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        { 
-
-        }
-
-        [HttpDelete("{id}")]
-        public void DeleteById(int id)
-        { 
-
         }
     }
 }
