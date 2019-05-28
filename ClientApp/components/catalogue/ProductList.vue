@@ -16,10 +16,9 @@
 <script>
 export default {
     name: 'product-list',
-    props: {
-        products: {
-            type: Array,
-            require: true
+    data () {
+        return {
+            products: []
         }
     },
     selectedProduct: null,
@@ -27,6 +26,14 @@ export default {
         select (product) {
             this.$router.push(`/products/${product.slug}`)
         }
+    },
+    mounted () {
+        fetch('api/products').then(response => {
+            return response.json()
+        })
+        .then(products => {
+            this.products = products
+        })
     }
 }
 </script>
