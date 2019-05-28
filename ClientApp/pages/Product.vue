@@ -16,9 +16,11 @@ export default {
         }
     },
     mounted () {
-        fetch(`/api/product/${slug}`).then(repsonse => {
+        const slug = this.$route.params.slug
+        fetch(`api/products/${slug}`).then(response => {
             return response.json()
-        }).then(product => {
+        })
+        .then(product => {
             this.product = product
         })
     }
