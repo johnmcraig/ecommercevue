@@ -1,69 +1,53 @@
 <template>
-    <div class="products">
-        <h1>Products</h1>
-        <div class="list">
-            <div class="item" v-for="product in products" :key="product.slug">
-               <h3 @click="select(product)"> {{ product.name}} </h3>
-               <img :src="product.thumbnail" :alt="product.name" @click="select(product)" />
-               <p @click="select(product)"> {{ product.shortDescription }} </p>
-               <p @click="select(product)"> {{ product.price }} </p>
-               <hr />
-            </div>
-        </div>
-    </div>
+  <div class="products">
+    <b-container>
+      <h1 class="mt-4 mb-4">Products</h1>
+      <b-row>
+        <b-col class="mb-4" sm="6" v-for="product in products" :key="product.id">
+          <b-media class="product">
+            <img slot="aside" :src="product.thumbnail" :alt="product.name" @click="view(product)">
+            <h2 class="mt-2" @click="view(product)">{{ product.name }}</h2>
+            <p class="mt-4 mb-4">{{ product.shortDescription }}</p>
+            <p class="mt-4 mb-4">{{ product.price }}</p>
+            <b-button variant="primary">Add to cart</b-button>
+          </b-media>
+        </b-col>
+      </b-row>
+    </b-container>
+  </div>
 </template>
 
 <script>
 export default {
-    name: 'product-list',
-    data () {
-        return {
-            products: []
-        }
-    },
-    selectedProduct: null,
-    methods: {
-        select (product) {
-            this.$router.push(`/products/${product.slug}`)
-        }
-    },
-    mounted () {
-        fetch('api/products').then(response => {
-            return response.json()
-        })
-        .then(products => {
-            this.products = products
-        })
+  name: 'product-list',
+  data () {
+    return {
+      products: []
     }
+  },
+  selectedProduct: null,
+  methods: {
+    view (product) {
+      this.$router.push(`/products/${product.slug}`)
+    }
+  },
+  mounted () {
+    fetch('api/products')
+      .then(response => {
+        return response.json()
+      })
+      .then(products => {
+        this.products = products
+      })
+  }
 }
 </script>
 
 <style>
-
-* {
-    box-sizing: border-box !important;
+.product {
+  border: 3px solid #eee;
 }
-
-.products {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.list .item {
-    width: 50%;
-    float: left;
-    padding: 20px 10px 20px;
-}
-
-.list img, .list h3, .list p {
+img, h2 {
     cursor: pointer;
 }
-
-.list img {
-    width: 100px;
-}
-
 </style>
-
-
