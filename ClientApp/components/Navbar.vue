@@ -1,5 +1,5 @@
 <template>
-	<b-navbar toggleable="md" type="dark" variant="dark">
+	<b-navbar toggleable="md" type="dark" variant="success">
       <b-container>
         <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
         <b-navbar-brand to="/">PhoneShop</b-navbar-brand>
