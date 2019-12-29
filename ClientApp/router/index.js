@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Router from 'vue-router'
+import VueRouter from 'vue-router'
 import Home from '../components/Home'
 import UserList from '../components/UserList'
 import NotFound from '../components/error-pages/NotFound'
@@ -7,7 +7,7 @@ import Catalogue from '../pages/Catalogue.vue'
 import Product from '../pages/Product.vue'
 
 
-Vue.use(Router)
+Vue.use(VueRouter)
 
 const routes = [
     { path: '/', name: 'Home', component: Home },
@@ -17,7 +17,7 @@ const routes = [
     { path: '*', name: 'Error', component: NotFound }
   ]
 
-export default new Router({
+export default new VueRouter({
     mode: 'history',
     routes
   })
